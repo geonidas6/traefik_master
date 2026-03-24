@@ -50,6 +50,11 @@ fi
 # Ensure network exists
 docker network create proxy_net 2>/dev/null || true
 
+# Setup ACME storage
+mkdir -p letsencrypt
+touch letsencrypt/acme.json
+chmod 600 letsencrypt/acme.json
+
 # Start the stack
 echo "Starting Traefik Master..."
 docker compose up -d
