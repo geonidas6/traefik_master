@@ -70,4 +70,5 @@ Pour visualiser tes blocages sur une interface web :
 ## 6. Commandes Utiles
 - `sudo cscli decisions list` : Voir les IP actuellement bannies.
 - `sudo cscli metrics` : Voir si les logs sont bien lus.
+- `sudo cscli decisions add --ip X.X.X.X --reason "manuel" --duration 24h` : Bannir manuellement une IP on peut mettre plus de 24h eg: 87600h. (10ans).
 - `sudo cscli decisions delete --ip X.X.X.X` : Débannir une IP.
