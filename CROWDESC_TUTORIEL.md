@@ -36,8 +36,11 @@ docker compose up -d --force-recreate
 curl -s https://install.crowdsec.net | sudo sh
 sudo apt-get install crowdsec crowdsec-firewall-bouncer-iptables -y
 
-# Installation de la collection Traefik
-sudo cscli collections install crowdsecurity/traefik
+# Installation des collections recommandées (Traefik + Sécurité Générale)
+sudo cscli collections install crowdsecurity/traefik \
+                               crowdsecurity/http-cve \
+                               crowdsecurity/whitelist-good-actors \
+                               crowdsecurity/base-http-scenarios
 ```
 
 ## 4. Liaison des logs
@@ -56,7 +59,7 @@ Pour visualiser tes blocages sur une interface web :
 1. Crée un compte sur [app.crowdsec.net](https://app.crowdsec.net).
 2. Lance la commande d'enrôlement :
    ```bash
-   sudo cscli console enroll token_a_recuperer_sur_crowdesc
+   sudo cscli console enroll cmogund94000y02jvnqcyvp49
    ```
 3. Retourne sur le site CrowdSec pour **accepter l'enrôlement**.
 4. **Important :** Une fois accepté, recharge CrowdSec pour appliquer :
