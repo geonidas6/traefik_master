@@ -72,3 +72,32 @@ Pour visualiser tes blocages sur une interface web :
 - `sudo cscli metrics` : Voir si les logs sont bien lus.
 - `sudo cscli decisions add --ip X.X.X.X --reason "manuel" --duration 24h` : Bannir manuellement une IP on peut mettre plus de 24h eg: 87600h. (10ans).
 - `sudo cscli decisions delete --ip X.X.X.X` : Débannir une IP.
+
+## 7. Mettre une IP sur Liste Blanche (Whitelist)
+Pour éviter que votre propre IP (ou celle d'un service de confiance) ne soit bloquée par erreur, il est recommandé de créer un fichier de whitelist permanent.
+
+### 7.1 Créer le fichier de whitelist
+Créez un nouveau fichier dans le répertoire des parsers de CrowdSec :
+```bash
+cat <<EOF | sudo tee /etc/crowdsec/parsers/s02-enrich/my-whitelist.yaml
+name: user/my-whitelist
+description: "Whitelist de mes adresses IP de confiance"
+whitelist:
+  reason: "IP de confiance"
+  ip:
+    - "VOTRE_IP_PUBLIQUE"
+EOF
+```
+*(Remplacez `VOTRE_IP_PUBLIQUE` par votre adresse réelle)*
+
+### 7.2 Appliquer la configuration
+Rechargez CrowdSec pour prendre en compte la modification :
+```bash
+sudo systemctl reload crowdsec
+```
+
+### 7.3 Vérifier
+Vérifiez que votre whitelist est bien activée :
+```bash
+sudo cscli parsers list | grep whitelist
+```
