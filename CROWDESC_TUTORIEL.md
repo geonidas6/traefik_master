@@ -59,7 +59,7 @@ Pour visualiser tes blocages sur une interface web :
 1. Crée un compte sur [app.crowdsec.net](https://app.crowdsec.net).
 2. Lance la commande d'enrôlement :
    ```bash
-   sudo cscli console enroll cmogund94000y02jvnqcyvp49
+   sudo cscli console enroll id_fornie
    ```
 3. Retourne sur le site CrowdSec pour **accepter l'enrôlement**.
 4. **Important :** Une fois accepté, recharge CrowdSec pour appliquer :
