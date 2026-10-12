@@ -1,0 +1,15 @@
+http:
+  routers:
+    timo:
+      rule: "Host(`timo.it-sefako.com`)"
+      entryPoints:
+        - websecure
+      service: timo
+      tls:
+        certResolver: myresolver
+
+  services:
+    timo:
+      loadBalancer:
+        servers:
+          - url: "http://172.18.0.1:3100"

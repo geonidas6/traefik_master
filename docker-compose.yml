@@ -6,10 +6,15 @@ services:
     env_file: .env
     environment:
       - DOCKER_API_VERSION=1.44
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     command:
       - "--api.insecure=false"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
+      - "--providers.file.directory=/dynamic"
+      - "--providers.file.watch=true"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
@@ -26,6 +31,7 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./dynamic:/dynamic:ro
       - ./letsencrypt:/letsencrypt
       - ./logs:/var/log/traefik:rw
     networks:
